@@ -1,0 +1,228 @@
+<!doctype html>
+<head>
+    <title>West Berkshire Council Live Dashboard</title>
+    <link rel="stylesheet" href="./stylesheets/base.css" />
+    <link rel="stylesheet" href="./stylesheets/bootstrap.min.css">
+    <link href="//fonts.googleapis.com/css?family=Noto+Sans:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="./stylesheets/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./stylesheets/gov.css">
+    <link rel="stylesheet" href="./stylesheets/style.css">
+    <link rel="stylesheet" href="./stylesheets/servicestyle.css">
+
+
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="./stylesheets/font-awesome/css/font-awesome-ie7.min.css">
+    <![endif]-->
+    <link href='//fonts.googleapis.com/css?family=Bitter:400,700,400italic' rel='stylesheet' type='text/css' />
+    <meta name="viewport"
+          content="width=device-width, minimum-scale=1.0,initial-scale=1.0, user-scalable=yes" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="robots" content="noindex,follow">
+    <style>
+        .page-header {
+            margin-top: 40px;
+        }
+
+        .mobile {
+            background: #50b432;
+            color: #fff;
+        }
+
+        .desktop {
+            background: #ed561b;
+            color: #fff;
+        }
+
+        .tablet {
+            background: #058dc7;
+            color: #fff;
+        }
+        .list-contents {
+            padding-left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="page">
+            <div id="header">
+                <div class="navbar navbar-default">
+                    <div class="navbar-header">
+                        <a href="http://www.westberks.gov.uk"><span style="width:200px; height:60px; display:table; float:left;"><span class="hidefromview">Home</span></span></a>
+                    </div>
+                </div>
+            </div>
+        <div class="">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1>
+                        Web Traffic Based on Data From Google Analytics
+                    </h1>
+        
+                </div>
+            </div>
+            <div class="row traffic">
+                <div class="col-sm-8">
+                    <div style="overflow:hidden" class="small-box">
+                        <div class="graph box-in">
+                            <div id="traffic-count-graph" class="box-inner">
+                            </div>
+                            <div id="graph-text">Users over past 48 hours</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row">
+                        <div id="traffic">
+                            <div class="col-sm-4">
+                                <div class="visitor-count mobile" id="mobile-count">
+                                    <span class="text-feature lrg-number" id="traffic-count-mobile">&nbsp;</span>
+                                    <div><i class="icon mobile icon-mobile-phone"></i> mobile</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="visitor-count tablet" id="tablet-count">
+                                    <span class="text-feature lrg-number" id="traffic-count-tablet">&nbsp;</span>
+                                    <div><i class="icon tablet icon-tablet"></i> tablet</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="visitor-count desktop" id="desktop-count">
+                                    <span class="text-feature lrg-number" id="traffic-count">&nbsp;</span>
+                                    <div><i class="icon desktop icon-desktop"></i> desk</div>
+                                </div>
+                            </div>
+                        </div>
+                        <br /><div id="users-text">Current users</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row bricksrow">
+                <div class="col-xs-12">
+                    <div class="bricks">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-4">
+                                <div class="brick">
+                                    <h2 class="brick-heading">Live Search</h2>
+                                    <div class="box search-terms">
+                                        <div id="search-terms"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-4">
+                                <div class="brick">
+                                    <h2 class="brick-heading">Live Pages</h2>
+                                    <div class="box searches">
+                                        <div id="search"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-4">
+                                <div class="brick last">
+                                    <h2 class="brick-heading">Most Popular Pages: Today</h2>
+                                    <div class="box popular content">
+                                        <div id="content"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="javascripts/vendor/xhr.min.js"></script>
+        <script src="javascripts/vendor/time.min.js"></script>
+        <script src="javascripts/vendor/timeFormat.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+        <script src="javascripts/vendor/handlebars-v3.0.3.js"></script>
+        <script src="javascripts/vendor/pretty.js"></script>
+        <script src="javascripts/vendor/bezier.js"></script>
+        <script src="javascripts/helpers/dataHelper.js"></script>
+        <script src="javascripts/helpers/templateHelper.js"></script>
+        <script src="javascripts/helpers/helper.js"></script>
+        <script src="javascripts/helpers/raphaelHelper.js"></script>
+        <script src="javascripts/landing-pages.js"></script>
+        <script src="javascripts/search.js"></script>
+        <script src="javascripts/traffic.js"></script>
+        <script src="javascripts/content.js"></script>
+        <script src="javascripts/manager.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>>
+        <script>
+            if (typeof window.matrix === 'undefined') { window.matrix = {}; }
+
+            matrix.settings = {
+                authServer: '/token',
+                profileId: $PROFILE_ID,
+                domain: $DOMAIN_URL,
+                titlefilter: ' ~ '
+            };
+
+            addEvent("load", window, matrix.manager.init);
+        </script>
+
+        <script type="template" id="select-options">
+            <option value="">Select {{object}}</option>
+            {{#options}}
+            <option value="{{id}}">{{name}}</option>
+            {{/options}}
+        </script>
+        <script type="template" id="content-results">
+            {{#pages}}
+            <div class="item">
+                <div class="link">
+                    <a href="http://www.westberks.gov.uk{{ url }}" target="_blank">{{ title }}</a>
+                </div>
+                <p class="">
+                    <span class="visitor-types mobile">
+                        <i class="icon mobile icon-mobile-phone"></i> {{ numberFormat visits.mobile }}
+                    </span>
+                    <span class="visitor-types tablet">
+                        <i class="icon tablet icon-tablet"></i> {{ numberFormat visits.tablet }}
+                    </span>
+                    <span class="visitor-types desktop">
+                        <i class="icon desktop icon-desktop"></i> {{ numberFormat visits.desktop }}
+                    </span>
+                </p>
+            </div>
+            {{/pages}}
+        </script>
+
+        <script type="template" id="search-result-items">
+            {{#pages}}
+            <div class="item">
+                <div class="device-type {{deviceCategory}}"></div>
+                <div class="link">
+                    <a href="http://www.westberks.gov.uk{{ url }}" target="_blank">{{ term }}</a>
+                </div>
+            </div>
+            {{/pages}}
+        </script>
+        <script type="template" id="search-result-item">
+            <div class="item">
+                <div class="device-type {{deviceCategory}}"></div>
+                <div>
+                    <a href="http://www.westberks.gov.uk{{ url }}" target="_blank">{{ term }}</a>
+                </div>
+            </div>
+        </script>
+        <script type="template" id="landing-pages-items">
+            {{#each pages}}
+            <div class="item">
+                <div class="device-type {{deviceCategory}}"></div>
+                <div class="link">
+                    {{#has_url}}<a href="http://www.westberks.gov.uk{{ url }}" target="_blank">
+                        {{/has_url}}
+                        {{ term }}
+                        {{#has_url}}
+                    </a>{{/has_url}}
+                    {{#has_source}}
+                    <em>via: {{ source }}</em>
+                    {{/has_source}}
+                    <em>using: {{ browser }} in {{ city }}</em>
+                </div>
+            </div>
+            {{/each}}
+        </script>
+</body>
+</html>
